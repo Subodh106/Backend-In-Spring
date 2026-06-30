@@ -33,7 +33,7 @@ public class UserController {
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUserById(@PathVariable String id){
-        UserService.deleteUserById(id);
+        userService.deleteUserById(id);
         return ResponseEntity.noContent().build();
     }
 

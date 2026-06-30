@@ -43,7 +43,7 @@ public class UserRepository {
         }
         return null;
     }
-    public void delete(String id){
+    public void deleteUserById(String id){
         users.removeIf(userDto ->  userDto.getId().equals(id));
         }
 }

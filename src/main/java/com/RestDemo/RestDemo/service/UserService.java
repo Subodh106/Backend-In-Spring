@@ -29,7 +29,7 @@ public class UserService {
         }
         return userRepository.update(updateUser , id);
     }
-    public static void deleteUserById(String id){
-        userRepository.delete(id);
+    public void deleteUserById(String id){
+        userRepository.deleteUserById(id);
     }
 }
