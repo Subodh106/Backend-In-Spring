@@ -2,14 +2,11 @@ package com.RestDemo.RestDemo.repository;
 
 import com.RestDemo.RestDemo.dto.CreateOrderDto;
 import com.RestDemo.RestDemo.dto.OrderDto;
-import com.RestDemo.RestDemo.dto.UserDto;
-import com.RestDemo.RestDemo.entities.User;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.UUID;
 
 @Repository
 public class OrderRepository {
@@ -17,6 +14,7 @@ public class OrderRepository {
 
     public List<OrderDto> create(CreateOrderDto createOrderDto) {
 //        orders.add(new OrderDto(1L , "laptop",188.88 ,"") )
+        System.out.println(createOrderDto);
         return Collections.singletonList(orders.get(1));
     }
 }
