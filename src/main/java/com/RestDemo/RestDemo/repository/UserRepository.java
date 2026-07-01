@@ -2,6 +2,7 @@ package com.RestDemo.RestDemo.repository;
 
 import com.RestDemo.RestDemo.dto.CreateUserDto;
 import com.RestDemo.RestDemo.dto.UserDto;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +17,6 @@ public class UserRepository {
         users.add(new UserDto(UUID.randomUUID().toString(), "hello1", "hello1@gmail.com"));
         users.add(new UserDto(UUID.randomUUID().toString(), "hello2", "hello2@gmail.com"));
     }
-
     public List<UserDto> findAllUsers(){
         return this.users;
     }
