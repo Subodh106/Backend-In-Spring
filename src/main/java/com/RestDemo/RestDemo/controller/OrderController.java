@@ -1,6 +1,7 @@
 package com.RestDemo.RestDemo.controller;
 
 import com.RestDemo.RestDemo.dto.CreateOrderDto;
+import com.RestDemo.RestDemo.dto.OrderDto;
 import com.RestDemo.RestDemo.service.OrderService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +20,7 @@ public class OrderController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<CreateOrderDto> createOrder(@RequestBody CreateOrderDto createOrderDto) {
-        return ResponseEntity.status(HttpStatus.OK).body(orderService.createOrder(createOrderDto).getBody());
+    public ResponseEntity<OrderDto> createOrder(@RequestBody CreateOrderDto createOrderDto) {
+        return ResponseEntity.status(HttpStatus.OK).body(orderService.createOrder(createOrderDto));
     }
 }

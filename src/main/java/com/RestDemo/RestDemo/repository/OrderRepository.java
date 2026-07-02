@@ -12,9 +12,8 @@ import java.util.List;
 public class OrderRepository {
     List<OrderDto> orders = new ArrayList<>();
 
-    public List<OrderDto> create(CreateOrderDto createOrderDto) {
-//        orders.add(new OrderDto(1L , "laptop",188.88 ,"") )
+    public OrderDto Create(CreateOrderDto createOrderDto) {
         System.out.println(createOrderDto);
-        return Collections.singletonList(orders.get(1));
+        return (orders.get(1));
     }
 }
