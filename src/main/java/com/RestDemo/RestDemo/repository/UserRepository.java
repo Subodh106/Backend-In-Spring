@@ -2,6 +2,7 @@ package com.RestDemo.RestDemo.repository;
 
 import com.RestDemo.RestDemo.dto.CreateUserDto;
 import com.RestDemo.RestDemo.dto.UserDto;
+import com.RestDemo.RestDemo.entities.User;
 import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +28,8 @@ public class UserRepository {
         }
         return null;
     }
-    public UserDto save(CreateUserDto createUser){
+
+    public UserDto save(User createUser) {
         UserDto user = new UserDto(UUID.randomUUID().toString() , createUser.getName(), createUser.getEmail());
         users.add(user);
         return user;

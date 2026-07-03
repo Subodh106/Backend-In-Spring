@@ -1,6 +1,7 @@
 package com.RestDemo.RestDemo.service;
 import com.RestDemo.RestDemo.dto.CreateUserDto;
 import com.RestDemo.RestDemo.dto.UserDto;
+import com.RestDemo.RestDemo.entities.User;
 import com.RestDemo.RestDemo.repository.UserRepository;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -21,8 +22,13 @@ public class UserService {
         return userRepository.findUserById(id);
     }
     public UserDto createUser(CreateUserDto createUser){
-        return userRepository.save(createUser);
+        User user = new User();
+        user.setName(createUser.getName());
+        user.setEmail(createUser.getEmail());
+        UserDto savedUser = userRepository.save(user);
+        return new UserDto(savedUser.getId(), savedUser.getName(), savedUser.getEmail());
     }
+
     public UserDto updateUser(CreateUserDto updateUser , String id){
         if(!Objects.equals(userRepository.findUserById(id).toString(), id)){
             return null;
