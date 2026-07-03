@@ -16,10 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 public class OrderController {
     private final OrderService orderService;
-//
-//    public OrderController(OrderService orderService) {
-//        this.orderService = orderService;
-//    }
 
     @PostMapping("/")
     public ResponseEntity<OrderDto> createOrder(@RequestBody CreateOrderDto createOrderDto) {
