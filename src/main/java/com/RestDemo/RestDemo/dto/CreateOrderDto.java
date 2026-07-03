@@ -1,19 +1,15 @@
 package com.RestDemo.RestDemo.dto;
 
 import com.RestDemo.RestDemo.entities.User;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
+@AllArgsConstructor
 public class CreateOrderDto {
     private String productName;
     private float price;
-    private User user;
-
-    public CreateOrderDto(String productName, float price, User user) {
-        this.productName = productName;
-        this.price = price;
-        this.user = user;
-    }
+    private UserDto user;
 }

@@ -2,6 +2,7 @@ package com.RestDemo.RestDemo.service;
 
 import com.RestDemo.RestDemo.dto.CreateOrderDto;
 import com.RestDemo.RestDemo.dto.OrderDto;
+import com.RestDemo.RestDemo.dto.UserDto;
 import com.RestDemo.RestDemo.entities.Order;
 import com.RestDemo.RestDemo.entities.User;
 import com.RestDemo.RestDemo.repository.OrderRepository;
@@ -24,10 +25,9 @@ public class OrderService {
         Order order = new Order();
         order.setProductName(createOrderDto.getProductName());
         order.setPrice(createOrderDto.getPrice());
-        order.setUser(createOrderDto.getUser());
         order.setUser(user);
         Order savedOrder = orderRepository.save(order);
-        return new OrderDto(savedOrder.getID(), savedOrder.getProductName(), savedOrder.getPrice(), savedOrder.getUser());
+        return new OrderDto(savedOrder.getID(), savedOrder.getProductName(), savedOrder.getPrice(), new UserDto(savedOrder.getUser().getId(), savedOrder.getUser().getName(), savedOrder.getUser().getEmail()));
     }
 
     public List<OrderDto> getOrderById(Long userId) {
@@ -39,7 +39,10 @@ public class OrderService {
                     order.getID(),
                     order.getProductName(),
                     order.getPrice(),
-                    order.getUser()
+                    new UserDto(order.getUser().getId(),
+                            order.getUser().getName(),
+                            order.getUser().getEmail()
+                    )
             ));
         });
 
