@@ -6,7 +6,6 @@ import com.RestDemo.RestDemo.repository.UserRepository;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Objects;
-import java.util.UUID;
 
 @Service
 public class UserService {
@@ -25,7 +24,7 @@ public class UserService {
         User user = new User();
         user.setName(createUser.getName());
         user.setEmail(createUser.getEmail());
-        UserDto savedUser = userRepository.save(user);
+        User savedUser = userRepository.save(user);
         return new UserDto(savedUser.getId(), savedUser.getName(), savedUser.getEmail());
     }
 
@@ -35,7 +34,8 @@ public class UserService {
         }
         return userRepository.update(updateUser , id);
     }
-    public void deleteUserById(String id){
-        userRepository.deleteUserById(id);
+
+    public void deleteUserById(Long id) {
+        userRepository.deleteById(id);
     }
 }
