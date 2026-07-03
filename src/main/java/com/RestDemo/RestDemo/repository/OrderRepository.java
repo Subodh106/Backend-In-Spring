@@ -16,10 +16,18 @@ public interface OrderRepository extends JpaRepository<Order, Long>, JpaSpecific
     List<Order> findOrderByID(Long userId);
 
     @Query(
-            value = "SELECT * FROM orders WHERE user_id = :userId ORDER BY created_at DESC",
-            countQuery = "SELECT COUNT(*) FROM orders WHERE user_id = :userId",
+            value = """
+                    SELECT *
+                    FROM orders
+                    WHERE user_id = :userId
+                     ORDER BY created_at DESC
+                    """,
+            countQuery = """
+                                 SELECT COUNT(*)
+                                FROM orders
+                                WHERE user_id = :userId
+                    """,
             nativeQuery = true
     )
     Page<Order> findOrdersByUserId(@Param("userId") Long userId, Pageable pageable);
-
 }
