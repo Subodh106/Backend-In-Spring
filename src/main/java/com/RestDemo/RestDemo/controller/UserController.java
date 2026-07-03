@@ -16,7 +16,8 @@ public class UserController {
     public UserController(UserService userService){
         this.userService = userService;
     }
-    @GetMapping("")
+
+    @GetMapping
     public ResponseEntity<List<UserDto>> getAllUser(){
         return ResponseEntity.status(HttpStatus.OK).body(userService.getAllUser());
     }
@@ -34,9 +35,15 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(userService.updateUser(updateUser , id));
     }
 
+
     @PatchMapping("/{id}")
     public ResponseEntity<UserDto> patchUser(@RequestBody CreateUserDto updateUser, @PathVariable Long id) {
         return ResponseEntity.status(HttpStatus.OK).body(userService.patchUser(updateUser, id));
+    }
+
+    @GetMapping("/paginate")
+    public ResponseEntity<List<UserDto>> getUserPaginated(@RequestParam int page, @RequestParam int pageSize, @RequestParam(defaultValue = "asc") String direction, @RequestParam(defaultValue = "name") String sortBy) {
+        return ResponseEntity.status(HttpStatus.OK).body(userService.getUsersPaginated(page, pageSize, direction, sortBy));
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUserById(@PathVariable Long id) {

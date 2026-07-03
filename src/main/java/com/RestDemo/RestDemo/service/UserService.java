@@ -6,6 +6,10 @@ import com.RestDemo.RestDemo.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -74,5 +78,18 @@ public class UserService {
     public void deleteUserById(Long id) {
         User user = userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("User not found"));
         userRepository.deleteById(user.getId());
+    }
+
+    public List<UserDto> getUsersPaginated(int page, int pageSize, String direction, String sortBy) {
+        Sort sort;
+        sort = direction.equalsIgnoreCase("asc") ? Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
+        Pageable pageable = PageRequest.of(page, pageSize, sort);
+        Page<User> usersPage = userRepository.findAll(pageable);
+        List<UserDto> userDto = new ArrayList<>();
+        usersPage.forEach(user -> {
+            userDto.add(new UserDto(user.getId(), user.getName(), user.getEmail()));
+        });
+        return userDto;
+
     }
 }
