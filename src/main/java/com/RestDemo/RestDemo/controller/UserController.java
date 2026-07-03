@@ -1,6 +1,7 @@
 package com.RestDemo.RestDemo.controller;
 import com.RestDemo.RestDemo.dto.CreateUserDto;
 import com.RestDemo.RestDemo.dto.UserDto;
+import com.RestDemo.RestDemo.entities.User;
 import com.RestDemo.RestDemo.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,11 +25,12 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(userService.getUserById(id));
     }
     @PostMapping
-    public ResponseEntity<UserDto> createUser(@RequestBody CreateUserDto createuser) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(userService.createUser(createuser));
+    public ResponseEntity<UserDto> createUser(@RequestBody CreateUserDto createUser) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(userService.createUser(createUser));
     }
-    @PutMapping
-    public ResponseEntity<UserDto> updateUser(@RequestBody CreateUserDto updateUser , @PathVariable String id){
+
+    @PutMapping("/{id}")
+    public ResponseEntity<UserDto> updateUser(@RequestBody CreateUserDto updateUser, @PathVariable Long id) {
         return ResponseEntity.status(HttpStatus.OK).body(userService.updateUser(updateUser , id));
     }
     @DeleteMapping("/{id}")

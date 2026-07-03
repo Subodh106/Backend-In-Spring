@@ -3,6 +3,7 @@ import com.RestDemo.RestDemo.dto.CreateUserDto;
 import com.RestDemo.RestDemo.dto.UserDto;
 import com.RestDemo.RestDemo.entities.User;
 import com.RestDemo.RestDemo.repository.UserRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Objects;
@@ -28,11 +29,16 @@ public class UserService {
         return new UserDto(savedUser.getId(), savedUser.getName(), savedUser.getEmail());
     }
 
-    public UserDto updateUser(CreateUserDto updateUser , String id){
-        if(!Objects.equals(userRepository.findUserById(id).toString(), id)){
+    public UserDto updateUser(CreateUserDto updateUser, Long id) {
+        User existingUser = userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("User not found"));
+        if (!Objects.equals(existingUser.getId(), id)) {
             return null;
         }
-        return userRepository.update(updateUser , id);
+        existingUser.setName(updateUser.getName());
+        existingUser.setEmail(updateUser.getEmail());
+
+        User updatedUser = userRepository.save(existingUser);
+        return new UserDto(updatedUser.getId(), updatedUser.getName(), updatedUser.getEmail());
     }
 
     public void deleteUserById(Long id) {
