@@ -18,7 +18,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping
+    @GetMapping("/allUsers")
     public ResponseEntity<List<UserDto>> getAllUser(){
         return ResponseEntity.status(HttpStatus.OK).body(userService.getAllUser());
     }
@@ -26,10 +26,7 @@ public class UserController {
     public ResponseEntity<UserDto> getUserById(@PathVariable Long id) {
         return ResponseEntity.status(HttpStatus.OK).body(userService.getUserById(id));
     }
-//    @PostMapping
-//    public ResponseEntity<UserDto> createUser(@Valid @RequestBody CreateUserDto createUser) {
-//        return ResponseEntity.status(HttpStatus.CREATED).body(userService.createUser(createUser));
-//    }
+
 
     @PutMapping("/{id}")
     public ResponseEntity<UserDto> updateUser(@RequestBody CreateUserDto updateUser, @PathVariable Long id) {
