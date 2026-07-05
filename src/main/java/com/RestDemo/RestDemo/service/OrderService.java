@@ -4,6 +4,7 @@ import com.RestDemo.RestDemo.dto.OrderDto;
 import com.RestDemo.RestDemo.dto.UserDto;
 import com.RestDemo.RestDemo.entities.Order;
 import com.RestDemo.RestDemo.entities.User;
+import com.RestDemo.RestDemo.exception.UserNotFoundException;
 import com.RestDemo.RestDemo.repository.OrderRepository;
 import com.RestDemo.RestDemo.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -53,7 +54,7 @@ public class OrderService {
     }
 
     public String deleteOrder(Long id) {
-        Order order = orderRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Order not found"));
+        Order order = orderRepository.findById(id).orElseThrow(() -> new UserNotFoundException("User not found with id :", id));
         orderRepository.deleteById(order.getID());
         return "Order deleted Successfully";
     }
