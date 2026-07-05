@@ -1,6 +1,8 @@
 package com.RestDemo.RestDemo.controller;
 
 import com.RestDemo.RestDemo.dto.CreateUserDto;
+import com.RestDemo.RestDemo.dto.LoginDto;
+import com.RestDemo.RestDemo.dto.LoginResponseDto;
 import com.RestDemo.RestDemo.dto.RegisterUserResponseDto;
 import com.RestDemo.RestDemo.service.AuthService;
 import lombok.RequiredArgsConstructor;
@@ -20,5 +22,10 @@ public class AuthController {
     @PostMapping("/register")
     public ResponseEntity<RegisterUserResponseDto> registerUser(@RequestBody CreateUserDto createUser) {
         return ResponseEntity.status(HttpStatus.OK).body(authService.RegisterUser(createUser));
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<LoginResponseDto> logInUser(@RequestBody LoginDto login) {
+        return ResponseEntity.status(HttpStatus.OK).body(authService.LogInUser(login));
     }
 }
