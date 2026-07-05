@@ -54,7 +54,7 @@ public class OrderService {
     }
 
     public String deleteOrder(Long id) {
-        Order order = orderRepository.findById(id).orElseThrow(() -> new UserNotFoundException("User not found with id :", id));
+        Order order = orderRepository.findById(id).orElseThrow(() -> new UserNotFoundException("User not found with id :"));
         orderRepository.deleteById(order.getID());
         return "Order deleted Successfully";
     }
@@ -64,9 +64,9 @@ public class OrderService {
         sort = direction.equalsIgnoreCase("asc") ? Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
         Pageable pageable = PageRequest.of(page, pageSize, sort);
         Page<Order> orderPage = orderRepository.findOrdersByUserId(userID, pageable);
-        List<OrderDto> orderDtos = new ArrayList<>();
+        List<OrderDto> orderDto = new ArrayList<>();
         orderPage.forEach(order -> {
-            orderDtos.add(
+            orderDto.add(
                     new OrderDto(
                             order.getID()
                             , order.getProductName()
@@ -79,7 +79,7 @@ public class OrderService {
                     )
             );
         });
-        return orderDtos;
+        return orderDto;
     }
 
 }

@@ -40,14 +40,6 @@ public class UserService {
         User existingUser = userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("User not found"));
         return new UserDto(existingUser.getId(), existingUser.getName(), existingUser.getEmail());
     }
-    public UserDto createUser(CreateUserDto createUser){
-        User user = new User();
-        user.setName(createUser.getName());
-        user.setEmail(createUser.getEmail());
-        User savedUser = userRepository.save(user);
-        return new UserDto(savedUser.getId(), savedUser.getName(), savedUser.getEmail());
-    }
-
     @Transactional
     public UserDto updateUser(CreateUserDto updateUser, Long id) {
         User existingUser = userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("User not found"));
