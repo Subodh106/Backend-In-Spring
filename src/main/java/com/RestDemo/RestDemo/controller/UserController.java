@@ -3,6 +3,7 @@ import com.RestDemo.RestDemo.dto.CreateUserDto;
 import com.RestDemo.RestDemo.dto.UserDto;
 import com.RestDemo.RestDemo.entities.User;
 import com.RestDemo.RestDemo.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,10 +26,10 @@ public class UserController {
     public ResponseEntity<UserDto> getUserById(@PathVariable Long id) {
         return ResponseEntity.status(HttpStatus.OK).body(userService.getUserById(id));
     }
-    @PostMapping
-    public ResponseEntity<UserDto> createUser(@RequestBody CreateUserDto createUser) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(userService.createUser(createUser));
-    }
+//    @PostMapping
+//    public ResponseEntity<UserDto> createUser(@Valid @RequestBody CreateUserDto createUser) {
+//        return ResponseEntity.status(HttpStatus.CREATED).body(userService.createUser(createUser));
+//    }
 
     @PutMapping("/{id}")
     public ResponseEntity<UserDto> updateUser(@RequestBody CreateUserDto updateUser, @PathVariable Long id) {
