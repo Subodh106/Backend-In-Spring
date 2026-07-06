@@ -1,5 +1,6 @@
 package com.RestDemo.RestDemo.config;
 
+import com.RestDemo.RestDemo.security.JwtAuthFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -16,9 +17,10 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     @Bean
-    SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) {
+    SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity, JwtAuthFilter jwtAuthFilter) {
         httpSecurity.csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .addFilter(jwtAuthFilter)
                 .authorizeHttpRequests(auth ->
                         auth.requestMatchers("api/v1/auth/**").permitAll()
                                 .requestMatchers("/api/v1/users/").hasRole("USER")
